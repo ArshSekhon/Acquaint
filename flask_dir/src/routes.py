@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, session
+from flask import Flask, render_template, redirect, url_for, session, jsonify
 from flask_dance.contrib.google import make_google_blueprint, google
 from oauthlib.oauth2.rfc6749.errors import InvalidGrantError, TokenExpiredError
+from server import test
 
 #For disabling https requiremet for google authenication
 import os
@@ -21,6 +22,7 @@ REDIRECT_URI = '/oauth2callbcak'
 blueprint = make_google_blueprint(
     client_id= GOOGLE_CLIENT_ID,
     client_secret= GOOGLE_CLIENT_SECRET,
+    redirect_to = 'home',
     scope=[
         "https://www.googleapis.com/auth/plus.me",
         "https://www.googleapis.com/auth/userinfo.email",
@@ -28,16 +30,16 @@ blueprint = make_google_blueprint(
 )
 app.register_blueprint(blueprint, url_prefix="/login")
 
-'''
+
 @app.route("/")
 def index():
     return "LANDIng page"
-'''
+
 @app.route("/login")
 def login():
     return render_template('login.html')
 
-@app.route("/")
+@app.route("/home")
 def home():
     if not google.authorized:
         return redirect(url_for("google.login"))
@@ -46,20 +48,28 @@ def home():
         assert resp.ok, resp.text
         #print(resp.json())
         try:
+            print("started try..")
             google_id = resp.json()["id"]
             email = resp.json()["email"]
             name = email.split("@")[0]
+            print(google_id,email,name)
             with sql.connect("database.db") as con:
+                print("started with..")
                 cur = con.cursor()
                 l = len((cur.execute('SELECT * FROM members WHERE email = ?',(email,))).fetchall())
+                print(l,"<<L>>")
                 if l == 0:
-                    cur.execute("INSERT INTO member (google_id, email, name) VALUES (?,?)",(google_id, email, name))
+                    print("executing...")
+                    cur.execute("INSERT INTO members (google_id, email, name) VALUES (?,?,?)",(google_id, email, name))
+                    print("done... executing")
                     user = 'new'
                     con.commit()
                     msg = "Record successfully added"
+                    print("DATabase executed..")
                     return redirect(url_for('new_user'))
                 else:
                     user = 'existing'
+                    print(user)
                     return redirect(url_for('dashboard'))
             #return "You are {email} on Google".format(email=resp.json()["email"])
             #return render_template('home.html')
@@ -76,6 +86,13 @@ def new_user():
 @app.route("/dashboard")
 def dashboard():
     return render_template('dashboard.html')
+
+@app.route("/recommendation")
+def recommendation():
+    x,y = test.predict_tags(1)
+    print(x,y)
+    print(type(x))
+    return jsonify({'id': x,'id2':y})
 
 if __name__ == '__main__':
     app.run(debug=True)

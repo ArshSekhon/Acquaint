@@ -53,7 +53,9 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 def predict_tags(input_id):
-    df_peers = pd.read_csv(os.path.join('data', 'excel_files','mentors.csv'))
+    
+    print(os.path.join(os.getcwd(), 'data', 'excel_files','mentors.csv'))
+    df_peers = pd.read_csv(os.path.join(os.getcwd(),'server','data', 'excel_files','mentors.csv'))
     df_peers = df_peers[['id','Name','Expertise', 'Interest']]
     int = df_peers['Interest']
     exp = df_peers['Expertise']
@@ -62,7 +64,7 @@ def predict_tags(input_id):
     list_of_interestrs_vector = []
     list_of_expertises_vector = []
 
-    model = gs.models.KeyedVectors.load_word2vec_format(os.path.join(os.getcwd(),'models', 'word2vec_models','GoogleNews-vectors-negative300.bin'), limit=500000, binary=True)
+    model = gs.models.KeyedVectors.load_word2vec_format(os.path.join(os.getcwd(),'server','models', 'word2vec_models','GoogleNews-vectors-negative300.bin'), limit=500000, binary=True)
     for i in range(len(int)):
         tags_int = str(int[i]).strip().split(',')
         tags_exp = str(exp[i]).strip().split(',')
@@ -84,7 +86,7 @@ def predict_tags(input_id):
         for other_interest in other:
             for interest in my_interests:
                 if(len(other_interest.split())>1 or len(interest.split())>1):
-                    print('comparing ' + interest + ' with ' + other_interest)
+                    #print('comparing ' + interest + ' with ' + other_interest)
                     temp_list_int_other = []
                     for other_interest_part in other_interest.split():
                         temp_list_int_other.append(model[other_interest_part])
@@ -98,7 +100,7 @@ def predict_tags(input_id):
                     if (sim > max):
                         max = sim
                     continue
-                print('comparing '+interest+' with '+other_interest)
+                #print('comparing '+interest+' with '+other_interest)
                 sim = model.similarity(interest.strip(), other_interest.strip())
                 if (sim > max):
                     max = sim
@@ -115,7 +117,7 @@ def predict_tags(input_id):
         for other_expertises in other:
             for expertises in my_expertise:
                 if (len(other_expertises.split()) > 1 or len(expertises.split()) > 1):
-                    print('comparing ' + expertises + ' with ' + other_expertises)
+                    #print('comparing ' + expertises + ' with ' + other_expertises)
                     temp_list_exp_other = []
                     for other_expertise_part in other_expertises.split():
                         temp_list_exp_other.append(model[other_expertise_part])
@@ -129,18 +131,22 @@ def predict_tags(input_id):
                     if (sim > max):
                         max = sim
                     continue
-                print('comparing ' + expertises + ' with ' + other_expertises)
+                #print('comparing ' + expertises + ' with ' + other_expertises)
                 sim = model.similarity(expertises.strip(), other_expertises.strip())
                 if (sim > max):
                     max = sim
         most_similar_exp.append(max)
     df_peers['exp_similarity'] = most_similar_exp
-    print(most_similar)
-    print(most_similar_exp)
+    #print(most_similar)
+    #print(most_similar_exp)
     df_int=df_peers.sort_values(by='similarity', ascending = False)
-    print(df_int['Name'][:3])
+    #print(df_int['Name'][:3])
+    interest = df_int['Name'][:3]
     df_exp=df_peers.sort_values(by='exp_similarity', ascending = False)
-    print(df_exp['Name'][:3])
+    #print(df_exp['Name'][:3])
+    expertise = df_exp['Name'][:3]
+    return ( interest, expertise)
+
 
 def run_lda(query):
 
@@ -170,7 +176,7 @@ def run_lda(query):
     wordlist = []
     for topic, words in topics_words:
         wordlist.append(words)
-    print(wordlist)
+    #print(wordlist)
 
     df_peers = pd.read_csv(os.path.join('data', 'excel_files', 'mentors.csv'))
     df_peers = df_peers[['id', 'Name', 'Expertise', 'Interest']]
@@ -202,7 +208,7 @@ def run_lda(query):
         for other_interest in other:
             for interest in my_interests:
                 if (len(other_interest.split()) > 1 or len(interest.split()) > 1):
-                    print('comparing ' + interest + ' with ' + other_interest)
+                    #print('comparing ' + interest + ' with ' + other_interest)
                     temp_list_int_other = []
                     for other_interest_part in other_interest.split():
                         temp_list_int_other.append(model[other_interest_part])
@@ -216,7 +222,7 @@ def run_lda(query):
                     if (sim > max):
                         max = sim
                     continue
-                print('comparing ' + interest + ' with ' + other_interest)
+                #print('comparing ' + interest + ' with ' + other_interest)
                 sim = model.similarity(interest.strip(), other_interest.strip())
                 if (sim > max):
                     max = sim
@@ -229,7 +235,7 @@ def run_lda(query):
         for other_expertises in other:
             for expertises in my_expertise:
                 if (len(other_expertises.split()) > 1 or len(expertises.split()) > 1):
-                    print('comparing ' + expertises + ' with ' + other_expertises)
+                    #print('comparing ' + expertises + ' with ' + other_expertises)
                     temp_list_exp_other = []
                     for other_expertise_part in other_expertises.split():
                         temp_list_exp_other.append(model[other_expertise_part])
@@ -243,7 +249,7 @@ def run_lda(query):
                     if (sim > max):
                         max = sim
                     continue
-                print('comparing ' + expertises + ' with ' + other_expertises)
+                #print('comparing ' + expertises + ' with ' + other_expertises)
                 sim = model.similarity(expertises.strip(), other_expertises.strip())
                 if (sim > max):
                     max = sim
@@ -251,13 +257,16 @@ def run_lda(query):
     df_peers['exp_similarity'] = most_similar_exp
 
     df_peers['exp_similarity'] = most_similar_exp
-    print(most_similar)
-    print(most_similar_exp)
+    #print(most_similar)
+    #print(most_similar_exp)
     df_int = df_peers.sort_values(by='similarity', ascending=False)
-    print(df_int['Name'][:3])
+    #print(df_int['Name'][:3])
+    interest = df_int['Name'][:3]
     df_exp = df_peers.sort_values(by='exp_similarity', ascending=False)
-    print(df_exp['Name'][:3])
-
+    #print(df_exp['Name'][:3])
+    expertise = df_exp['Name'][:3]
+    print(">>>>",type(interest))
+    return (interest, expertise)
 
 def read_from_url(url):
 
