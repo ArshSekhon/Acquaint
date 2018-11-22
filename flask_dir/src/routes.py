@@ -94,5 +94,20 @@ def recommendation():
     print(type(x))
     return jsonify({'id': x,'id2':y})
 
+@app.route("/recommendation/question")
+def recommendation():
+    x,y = test.run_lda("My I'm living on Earth")
+    print(x,y)
+    print(type(x))
+    return jsonify({'id': x,'id2':y})
+
+@app.route("/recommendation/url", methods=['POST'])
+def recommendation():
+    url = request.json['url']
+    print(url)
+    x,y = test.run_lda(url)
+    print(x,y)
+    print(type(x))
+    return jsonify({'id': x,'id2':y})
 if __name__ == '__main__':
     app.run(debug=True)
