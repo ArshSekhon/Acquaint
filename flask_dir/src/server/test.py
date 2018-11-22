@@ -141,10 +141,12 @@ def predict_tags(input_id):
     #print(most_similar_exp)
     df_int=df_peers.sort_values(by='similarity', ascending = False)
     #print(df_int['Name'][:3])
-    interest = df_int['Name'][:3]
+    interest = df_int['Name'][:3].tolist()
+    print(type(interest))
     df_exp=df_peers.sort_values(by='exp_similarity', ascending = False)
     #print(df_exp['Name'][:3])
-    expertise = df_exp['Name'][:3]
+    expertise = df_exp['Name'][:3].tolist()
+    print(type(expertise))
     return ( interest, expertise)
 
 
@@ -261,10 +263,10 @@ def run_lda(query):
     #print(most_similar_exp)
     df_int = df_peers.sort_values(by='similarity', ascending=False)
     #print(df_int['Name'][:3])
-    interest = df_int['Name'][:3]
+    interest = df_int['Name'][:3].tolist()
     df_exp = df_peers.sort_values(by='exp_similarity', ascending=False)
     #print(df_exp['Name'][:3])
-    expertise = df_exp['Name'][:3]
+    expertise = df_exp['Name'][:3].tolist()
     print(">>>>",type(interest))
     return (interest, expertise)
 
@@ -280,6 +282,6 @@ def read_from_url(url):
     run_lda(text)
 
 if __name__ == "__main__":
-     #predict_tags(1)
+     predict_tags(0)
      #run_lda("The foreign buyer’s tax – in all of its forms and under different governments – never caused strife among voters. It achieved a status that is seldom seem in a province as polarized politically as British Columbia, with NDP voters approving of the actions of Christy Clark in 2016 and BC Liberal voters thinking the current government’s changes were admissible in 2017.")
-    read_from_url("http://news.bbc.co.uk/2/hi/health/2284783.stm")
+     #read_from_url("http://news.bbc.co.uk/2/hi/health/2284783.stm")
