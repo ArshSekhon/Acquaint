@@ -1,0 +1,22 @@
+{
+    "name": "Project Unknown",
+    "version": "1.0",
+    "description": "Project Unknown : A sick project!! Potatoes!!",
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+      },
+      "permissions": [
+        "activeTab",
+        "contextMenus",
+        "storage",
+        "history",
+        "tabs",
+        "webNavigation",
+        "declarativeContent"
+      ],
+      "page_action": {
+        "default_popup": "popup.html"
+      },
+    "manifest_version": 2
+  }
