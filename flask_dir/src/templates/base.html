@@ -2,6 +2,7 @@
 <html>
   <head>
     {% block head %}
+    <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>{% block title %}{% endblock %} - Connect app</title>
     <!-- Compiled and minified CSS -->
@@ -11,10 +12,10 @@
     {% endblock %}
   </head>
   <body>
-    <div id="content">{% block content %}{% endblock %}</div>
+    {% block body %}{% endblock %}
     <div id="footer">
       {% block footer %}
-      &copy; Copyright 2010 by <a href="http://localhost:5000">you</a>.
+      &copy; Copyright 2018.
       {% endblock %}
     </div>
   </body>
