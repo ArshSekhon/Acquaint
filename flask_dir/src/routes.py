@@ -117,7 +117,7 @@ def dashboard():
         #'interest': interest,
         #'expertise': expertise,
     }
-    return render_template('dashboard.html' , context)
+    return render_template('dashboard.html' , context=context)
 
 @app.route("/recommendation/id", methods=['GET'])
 def recommendation():
@@ -157,7 +157,7 @@ def profile(i_num):
       'http://127.0.0.1:5000/recommendation/id',
       params=params)
     result = r.json()
-    print(result['rec_4_interest'])
+    #print(result['rec_4_interest'])
     return render_template('profile.html')
 
 

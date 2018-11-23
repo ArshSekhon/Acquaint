@@ -1,2 +1,4 @@
 ./word2vec_models
- __pycache__/createDB.cpython-37.pyc
+ /*.pyc
+ *.pyc
+ ./*.pyc
