@@ -158,17 +158,34 @@ def url_recommendation():
 
 @app.route("/profile/<i_num>")
 def profile(i_num):
-    url = "https://people.wdf.sap.corp/api/idm/users/"+i_num+".json"
-
+    url = "https://people.wdf.sap.corp/api/idm/users/"+str(i_num)+".json"
     headers = {
         'Authorization': "Basic og==""",
         'cache-control': "no-cache" 
         }
 
-    response = requests.request("GET", url, headers=headers,verify=False)
+    #response = requests.request("GET", url, headers=headers,verify=False)
 
-    print(response.text)
-    return response.text
+    #print(response.text)
+    context = {
+        'person': {
+            'name': response.text['first_name'] + response.text['last_name'],
+            'i_num': response.text['uid'],
+            'intern_fullTime': response.text['organisation.job_family'],
+        },
+        'contact_info': {
+            'sap_email': response.text['email'],
+            'p_no': response.text['company_phone'],
+            'address': response.text['street']+", "+response.text['city']+", "+response.text['country_code']+" "+response.text['zip_code'],
+        },
+        'org_info': {
+            'office': response.text['company'],
+            'org': response.text['Digital Business Services'],
+            'manager': response.text['organisation.manager_uid'],
+        }
+
+    }
+    return render_template('profile.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
