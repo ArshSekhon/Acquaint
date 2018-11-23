@@ -145,7 +145,7 @@ def url_recommendation():
     rec_4_interest, rec_4_expert = test.read_from_url(url)
     return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
 
-@app.route("/profile"):
+@app.route("/profile")
 def profile():
     return "nothing"
 
