@@ -32,6 +32,14 @@ blueprint = make_google_blueprint(
 )
 app.register_blueprint(blueprint, url_prefix="/login")
 
+#Functions
+'''
+def recommendation(mid):
+    print("id>>>>", mid , type(mid))
+    rec_4_interest, rec_4_expert = test.predict_tags(int(mid))
+    print(rec_4_expert)
+    return ({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
+'''
 
 @app.route("/")
 def index():
@@ -106,8 +114,8 @@ def dashboard():
     usr_expertise = "dummy string"
 
     #On basis of usr_id(expterise, interest) recommended mentors/peer
-    #rec_4_interest, rec_4_expert = 
-
+    #rec_4_interest, rec_4_expert = recommendation(1) 
+    #print(rec_4_interest)
     context = {
         'user': {
             'usr': usr,
@@ -150,16 +158,29 @@ def url_recommendation():
 
 @app.route("/profile/<i_num>")
 def profile(i_num):
+    '''
     params = {
-        'mid': i_num,
+        'Authorization': "Basic og==''",
+        'cache-control': "no-cache"
     }
     r = requests.get(
-      'http://127.0.0.1:5000/recommendation/id',
+      'https://people.wdf.sap.corp/api/idm/users/I866044.json',
       params=params)
     result = r.json()
     #print(result['rec_4_interest'])
     return render_template('profile.html')
+    '''
+    url = "https://people.wdf.sap.corp/api/idm/users/I866044.json"
 
+    headers = {
+        'Authorization': "Basic og==""",
+        'cache-control': "no-cache" 
+        }
+
+    response = requests.request("GET", url, headers=headers,verify=False)
+
+    print(response.text)
+    return response.text
 
 if __name__ == '__main__':
     app.run(debug=True)
