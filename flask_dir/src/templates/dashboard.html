@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>Acquaint</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!-- Compiled and minified JavaScript -->
@@ -70,20 +71,24 @@
                         <div class="line-middle-card">
                         </div>
                         <div class="card-content">
+                            {% for u in context['expertise'] %}
+                            <div>
                             <span class="oval-small"></span>
                             <span class="mentors">
-                                <p class="mentor-name"> name</p>
-                                <p class="mentor-email">ex@ex.com</p>
+                                <p class="mentor-name"> {{ u[0] }}</p>
+                                <p class="mentor-email">{{ u[1] }}</p>
                             </span>
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
             </div>
             <div class="col s4 m4">
                     <div class="row">
                             <div class="col s12 m12">
-                                <form action="{{ url_for('dashboard') }}" method="POST">
-                                    <input type="text" class="input" name="ques">
-                                </form>
+                                <!--form action="{{ url_for('dashboard') }}" method="POST">
+                                </form-->
+                                <input id="ques_id" type="text" class="input" name="ques" value="" placeholder="Ask a question, any question!">
                             </div>
                     </div>
                     <div class="card custom-card-right">
@@ -104,4 +109,66 @@
         </div>
     <!--/div-->
 </body>
+<script>
+    $(document).ready(function(){
+        $('#ques_id').on('keypress', function(e) {
+            if (e.which === 13){
+                console.log("entered..")
+                $(this).attr("disable", "disabled");
+                var ques = $(this).val()
+                $('#loading-image').show();
+                $.ajax({
+					url: '/api/recommendation/question',
+					type: 'GET',
+					data: {'ques':ques},
+					success: function(response){
+                        console.log(response)
+						if(response){
+                            console.log("Successful")
+							console.log(response.rec_4_interest)
+						} else {
+							console.log("error");
+							
+						}						
+					},
+                    complete: function(){
+                        $('#loading-image').hide();
+                    },
+                    
+				});
+
+                $(this).removeAttr("disabled");
+            }
+            
+            /*
+            $.ajax({
+					url: '/api/recommendation/question',
+					type: 'POST',
+					data: {'pid':pid},
+					success: function(response){
+						if(response.data){
+							$('#atw-toast').html("Added to watchlist");
+							$('#atw-toast').addClass("show");
+							setTimeout(function(){
+								$('#atw-toast').removeClass("show");
+							}, 3000);
+							$(this).fadeOut('slow', function(){
+								console.log($(this));
+								$(this).css('visibility', 'hidden');
+							})
+						} else {
+							console.log(response.error);
+							$('#atw-toast').html("Something went wrong");
+							$('#atw-toast').addClass("show");
+							setTimeout(function(){
+								$('#atw-toast').removeClass("show");
+							}, 3000);
+						}
+						
+					},
+				});*/
+        })
+
+    })
+</script>
 </html>
