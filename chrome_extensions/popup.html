@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <link rel="stylesheet" href="./lib/lc_switch.css"> 
+        <link rel="stylesheet" href="./popup.css">
+  </head>
+  <body>
+
+    <div id="header">
+       <img src="acquaint.svg"  id="extension-title"> 
+       <img src="settings.svg" id="settings-icon">
+    </div>
+    <div id="controls-wrapper">
+        <div id="enabled-setting-container">
+            <span id="label-for-enable">Enable Acquaint:</span>
+            <input type="checkbox"  name="switch" id="switch" checked="true" style="visibility:hidden"/> 
+        </div> 
+        <div id="error-container" style="display:none;"> </div>
+        <button type="button" id="AddExceptionButton" >Add Current Website to Exceptions</button>
+        <div id ="ExceptionContainer"> </div>
+    </div> 
+
+    <div class="exceptions-list"></div>
+    <script src="./lib/jquery.min.js"></script> 
+    <script src="./lib/lc_switch.js"></script> 
+    </div>
+
+    <script src="popup.js"></script>  
+ </body>
+</html>

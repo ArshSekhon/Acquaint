@@ -1,0 +1,34 @@
+{
+    "name": "Acquaint",
+    "version": "1.0",
+    "description": "Extension that helps you connect with others!",
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+      },
+      "permissions": [
+        "activeTab",
+        "contextMenus",
+        "storage",
+        "history",
+        "tabs",
+        "webNavigation",
+        "declarativeContent"
+      ],
+      "page_action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "./logos/16.png",
+            "32": "./logos/32.png",
+            "48": "./logos/48.png",
+            "128": "./logos/128.png"
+          }
+      },
+      "icons": {
+        "16": "./logos/16.png",
+        "32": "./logos/32.png",
+        "48": "./logos/48.png",
+        "128": "./logos/128.png"
+      },
+    "manifest_version": 2
+  }
