@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa:700');
+body{
+    width: 350px;
+    margin:0;
+}  
+#switch{
+  display: hidden;
+}
+#ExceptionContainer{
+    text-align: center;
+}
+
+div#controls-wrapper {
+    width: auto;
+    margin: auto;
+}
+#AddExceptionButton { 
+    width: auto; 
+    padding:3% 5%;
+    margin-top:16px;
+    cursor: pointer;
+    border: none;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px 0 #dfdfdf;
+    background-color: #ffffff;
+    font-family: 'Work Sans';
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ec747e; 
+    margin-left:16px; 
+    margin-right:16px;
+    white-space:nowrap;
+    transition: all 0.2s ease-in-out;
+  }
+  #AddExceptionButton:focus {outline:0;}
+  #AddExceptionButton:hover{ 
+    color:white;
+    background:rgb(243, 153, 131); 
+  }
+  
+
+  #label-for-enable{
+    font-family: 'Work Sans';
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: rgb(124, 124, 124);
+    margin: auto 0;
+  }
+
+  #enabled-setting-container{
+    display: flex;
+    justify-content: space-between;
+    margin:16px;
+    width: auto;
+    padding: 0 16px;
+  }
+  #ExceptionContainer {
+    height: 200px;
+    background: #80808017;
+    margin: 16px;
+    border-radius: 3px;
+    overflow-y: scroll;
+}
+  .exception-entry{
+    display: flex;
+    justify-content: space-between;
+    transition: all 0.2s ease-in-out;
+    padding: 8px 16px; 
+  }
+
+  .exception-entry{
+    font-family: 'Work Sans';
+    font-size: 14px;
+    color:#132e4b;
+  }
+  .exception-entry:hover{
+      background: #dadada;
+  } 
+  .delete-exception{
+      cursor: pointer;
+  }
+  .delete-exception:hover g{
+    stroke: #cdcbcb!important;
+    }
+
+ .delete-exception:hover circle{
+      fill:gray!important;
+  }
+  #error-container{
+    margin:8px 24px; 
+    color:rgb(158, 0, 0); 
+    font-family: 'Work Sans';
+    font-size: 14px;
+
+    
+  }
+  #header{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    background-image: url(bg.png), none;
+  }
+  #extension-title {
+    height: 42px; 
+    margin: 32px 16px;
+    width: auto;
+  }
+  #settings-icon {
+    height: 28px;
+    width: 28px;
+    margin-top: 10%;
+    margin-right: 32px;
+    cursor: pointer;
+  }
+  #settings-icon:hover {
+    transform: rotate(90deg);
+    transition: all 0.2s ease-in-out;
+  }

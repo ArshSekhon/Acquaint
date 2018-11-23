@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="350px" height="100px" viewBox="0 0 350 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>Logotype</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="97.3661802%" y1="4.17172454%" x2="5.71728682%" y2="93.637886%" id="linearGradient-1">
+            <stop stop-color="#EC6F66" offset="0%"></stop>
+            <stop stop-color="#F3A183" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Logotype" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-Copy-7" fill="url(#linearGradient-1)" x="0" y="0" width="350" height="100"></rect>
+    </g>
+</svg>
