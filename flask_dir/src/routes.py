@@ -123,13 +123,16 @@ def dashboard():
         cur = con.cursor()
         mentor = []
         for name in rec_4_expert:
+            print(name)
             x = (cur.execute('SELECT name,email FROM members WHERE name = ?',(name,))).fetchall()
-            print(x)
-            mentor = mentor.append(x[0])
+            print(x[0])
+            mentor.append(x[0])
+            print(type(mentor))
     except:
         print("error")
-   
-    print(type(mentor))
+    print(mentor)
+    for x in mentor:
+        print(x[0], x[1])
     context = {
         'user': {
             'usr': usr,
@@ -157,10 +160,14 @@ def recommendation_api():
 
 @app.route("/api/recommendation/question", methods=['GET'])
 def question_api():
+    print("Ajax working")
     if 'ques' in request.args:
         ques = request.args['ques']
+    print(ques)
     rec_4_interest, rec_4_expert = test.run_lda(ques)
-    return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
+    print("result")
+    print(rec_4_expert)
+    return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert, 'Access-Control-Allow-Origin': '*'})
 
 
 @app.route("/ext/processActivity", methods=['GET','POST'])
@@ -170,7 +177,7 @@ def url_recommendation():
     print("api working "+request.args['url'])
     print("\n\n\n\n\n\n")
     return "ok", 200, {'Access-Control-Allow-Origin': '*'}
-    """if 'url' in request.args:
+    if 'url' in request.args:
         #print('working')
         url = request.args['url']
     #print('not working...')
@@ -178,7 +185,7 @@ def url_recommendation():
     #print(url)
     #print(type(url))
     rec_4_interest, rec_4_expert = test.read_from_url(url)
-    return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})"""
+    return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
 
 
 @app.route("/profile_json/<i_num>")
