@@ -3,7 +3,7 @@
     "version": "1.0",
     "description": "Extension that helps you connect with others!",
     "background": {
-        "scripts": ["background.js"],
+        "scripts": ["./lib/jquery.min.js","background.js"],
         "persistent": false
       },
       "permissions": [

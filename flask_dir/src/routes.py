@@ -143,10 +143,15 @@ def question():
     rec_4_interest, rec_4_expert = test.run_lda(ques)
     return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
 
-@app.route("/recommendation/url", methods=['GET'])
+
+@app.route("/ext/processActivity", methods=['GET','POST'])
 def url_recommendation():
     #print("api working...")
-    if 'url' in request.args:
+    print("\n\n\n\n\n\n")
+    print("api working "+request.args['url'])
+    print("\n\n\n\n\n\n")
+    return "ok", 200, {'Access-Control-Allow-Origin': '*'}
+    """if 'url' in request.args:
         #print('working')
         url = request.args['url']
     #print('not working...')
@@ -154,7 +159,18 @@ def url_recommendation():
     #print(url)
     #print(type(url))
     rec_4_interest, rec_4_expert = test.read_from_url(url)
-    return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
+    return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})"""
+
+
+@app.route("/profile_json/<i_num>")
+def profile_json(i_num):
+    url = "https://people.wdf.sap.corp/api/idm/users/" + str(i_num) + ".json"
+    headers = {
+        'Authorization': "Basic og==""",
+        'cache-control': "no-cache"
+    }
+    response = requests.request("GET", url, headers=headers, verify=False)
+    return response.text
 
 @app.route("/profile/<i_num>")
 def profile(i_num):
