@@ -158,19 +158,7 @@ def url_recommendation():
 
 @app.route("/profile/<i_num>")
 def profile(i_num):
-    '''
-    params = {
-        'Authorization': "Basic og==''",
-        'cache-control': "no-cache"
-    }
-    r = requests.get(
-      'https://people.wdf.sap.corp/api/idm/users/I866044.json',
-      params=params)
-    result = r.json()
-    #print(result['rec_4_interest'])
-    return render_template('profile.html')
-    '''
-    url = "https://people.wdf.sap.corp/api/idm/users/I866044.json"
+    url = "https://people.wdf.sap.corp/api/idm/users/"+i_num+".json"
 
     headers = {
         'Authorization': "Basic og==""",

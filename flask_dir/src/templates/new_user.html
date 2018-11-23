@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Connect@SAP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='libs/nicelabels/css/jquery-nicelabel.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/new_user.css') }}">
+</head>
+<body>
+
+    <div class="row">
+        <div class="col s6 m2">
+          <a href="/" class="brand-logo nav-bar-logo"><img src ="{{ url_for('static', filename='images/acquaint-logo.svg') }}" ></a>
+        </div>
+    </div>
+    <div class="container">
+
+                <div class="onboarding-card" id="onboardin-card-1" style="display: none;">
+                    <h2 class="onboardin-heading">Hello There!</h2>
+                    <p class="onboarding-message">To help get you connected, we need to know more about you! </p>
+                    <div class="onboardin-qa-container onboardin-qa-container-1 text-question">
+                        <p class="onboarding-question">Firstly, what is your SAP ID?</p>
+                        <input type="text" class="browser-default onboarding-answer-text"/>
+                    </div>
+                    <div class="next-button-row">
+                            <a class="waves-effect waves-light btn next-btn">Next</a>
+                    </div>
+                </div>
+
+                <div class="onboarding-card" id="onboardin-card-2" style="display: none;">
+                    <div class="onboardin-qa-container onboardin-qa-container-2 checkbox-question">
+                        <p class="onboarding-question">Next, what are you good at? (No need to be modest!)</p>
+                        <div class="checkbox-container" id="expertise-checkbox-container">
+                            </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="onboardin-qa-container onboardin-qa-container-2 text-question">
+                        <p class="onboarding-question">Or, input some of your own (separated by commas):</p>
+                        <input type="text" class="browser-default onboarding-answer-text"/>
+                    </div>
+                    <div class="next-button-row">
+                            <a class="waves-effect waves-light btn next-btn">Next</a>
+                    </div>
+                </div>
+
+                 <div class="onboarding-card" id="onboardin-card-3" style="display: none;">
+                    <div class="onboardin-qa-container onboardin-qa-container-3 checkbox-question">
+                        <p class="onboarding-question">Finally, what about your hobbies and interests?</p>
+                        <div class="checkbox-container" id="interest-checkbox-container">
+                            </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="onboardin-qa-container onboardin-qa-container-3 text-question" >
+                        <p class="onboarding-question">Or, input some of your own (separated by commas):</p>
+                        <input type="text" class="browser-default onboarding-answer-text"/>
+                    </div>
+                    <div class="next-button-row">
+                            <a class="waves-effect waves-light btn next-btn">Next</a>
+                    </div>
+                </div>
+
+                  <div class="onboarding-card" id="onboardin-card-4">
+                    <h2 class="onboardin-heading">Thanks Arsh!</h2>
+                        <p class="onboarding-message">You’ve completed the first steps on your journey to connect with your community at SAP. </p>
+                        <p class="onboarding-message">Next, download our Chrome Extension, which allow us to use your search questions and inquiries to better match you with potential experts on the topic!</p>
+
+                        <div id="onboarding-end-btn-container">
+                            <a class="waves-effect waves-light btn fancy-btn-hover" id="download-ext-btn">Download the Extension</a>
+                            <a class="waves-effect waves-light btn" id="go-to-dash-btn">Go to the Dashboard</a>
+                        </div>
+                </div>
+
+    </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="{{ url_for('static', filename='libs/nicelabels/js/jquery.nicelabel.js') }}"></script>
+<script src="{{ url_for('static', filename='js/new_user.js') }}"></script>
+
+</body>
+</html>
