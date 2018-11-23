@@ -1,3 +1,4 @@
+ 
 function extractHostname(url) {
     var hostname; 
     if (url.indexOf("//") > -1) {
@@ -36,7 +37,17 @@ chrome.runtime.onInstalled.addListener(function() {
                     var exceptionWebsites = result.exceptionWebsites;
                     if(exceptionWebsites.indexOf(extractHostname(tab.url))==-1){
                         // make the API call here send tab.url
-                        alert("test:"+result.UserId+" "+tab.url);
+                        var settings = {
+                            "async": true, 
+                            "url": "http://127.0.0.1:5000/ext/processActivity?url="+tab.url+"&userid="+result.UserId,
+                            "method": "GET",
+                             
+                        }
+                        
+                        $.ajax(settings).done(function (response) {
+                            
+                        }).fail((a)=>{console.log(a.statusCode())});;
+                       
                     }
                         
                 });

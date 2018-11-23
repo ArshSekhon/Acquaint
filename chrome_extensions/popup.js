@@ -112,3 +112,4 @@ chrome.storage.sync.get('IsSAPConnectActive', function(data) {
     chrome.storage.sync.set({IsSAPConnectActive: ($("#switch").attr("checked")!=undefined)}, function() {  
     }) 
 });
+ 
