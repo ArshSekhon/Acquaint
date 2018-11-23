@@ -9,17 +9,27 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
-<body style="background-image: url({{ url_for('static', filename='images/group.svg') }})">
+<body>
     <div class="container">
-        <img>
-        <div class="row">
-            <div class="col s12 m6">
-                <h2>Login</h2>
-                <a href= "{{ url_for('google.login') }}">Google Login </a>
-                <div class="Rectangle">Box</div> 
-            </div> 
-        </div>
+    <div class="login-container row">
+        <img src ="{{ url_for('static', filename='images/acquaint-logo.svg') }}">
     </div>
+        <div class="row">
+            <div class="col s12 m6 offset-m3">
+                <div class="login-card">
+                    <h2 class="sign-in-heading">Sign In</h2>
+                    <p class="sign-in-message">Hi there! Interested in connecting with people easily within SAP? Sign in using any of the options below:</p>
+                    <div class="login-btn-container">
+                        <a class="waves-effect waves-light btn sso-login-btn login-btn">Sign in with Single SignOn </a>
+                        <a href= "{{ url_for('google.login') }}" class="waves-effect waves-light btn google-login-btn login-btn"><img src ="{{ url_for('static', filename='images/logos/google-logo.svg') }}">Sign in with Google </a>
+                        <a class="waves-effect waves-light btn fb-login-btn login-btn"><img src ="{{ url_for('static', filename='images/logos/facebook-logo.svg') }}">Sign in with Facebook </a>
+
+                    </div>
+                </div>
+                </div>
+        </div>
+        </div>
 </body>
 </html>

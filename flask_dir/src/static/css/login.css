@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900');
+body{
+    background-image: url('../images/bg-1.svg');
+    background-size: cover ;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-container{
+    text-align: center;
+}
+.login-card {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    text-align: center;
+    width: 553px;
+    height: 476px;
+    border-radius: 6px;
+    box-shadow: 0 10px 20px 0 #ea6d85;
+    background-color: #ffffff;/*
+    margin: 30px 15px 30px 15px;*/
+    padding: 5% 0 11% 0;}
+.sign-in-heading{
+  font-family: 'Work Sans';
+  font-size: 70px;
+  font-weight: 300;
+    color:#ec747e;
+   margin: 6% 0 0 0;
+}
+.sign-in-message{
+    font-family:'Work Sans';
+    font-size: 16px;
+    font-weight: 300;
+    width: 396px;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: center;
+    line-height: 1.44;
+    letter-spacing: normal;
+    color:#757575;
+    margin: auto;
+}
+.google-login-btn{
+  background-color: #ffffff !important;
+    color: black!important;
+
+}
+.google-login-btn:hover{
+  background-color: #fafafa !important;;
+}
+.sso-login-btn{
+    background: #fa9c51;
+}
+.sso-login-btn:hover{
+    background: #fa874b;
+}
+.fb-login-btn{
+    background: #3c5a9a;
+}
+.fb-login-btn:hover{
+    background: #304e9a;
+}
+.login-btn:hover{
+
+    padding: 1% 14%!important;
+}
+.login-btn{
+    white-space: nowrap;
+    padding: 1% 14%!important;
+    border-radius: 26px;
+    margin: 8px 0 ;
+    font-weight: 300;
+    font-family:'Work Sans';
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+    text-transform: none;
+    height: auto !important;
+    width: auto !important;
+}
+.login-btn img{
+    height: 16px;
+    margin: auto 8px;
+}
+.login-btn-container{
+    width: fit-content;
+}
