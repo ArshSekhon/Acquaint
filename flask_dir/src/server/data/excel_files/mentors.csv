@@ -6,7 +6,7 @@ id,google_id,email,i_number,Name,Expertise,Interest
 5,,christine.vukusic@sap.com,I819109,Christine Vukusic," Leadership, Strategy, Automation, People, Change Management, Project Management, Translation"," Soccer, Skiing, Live Theatre, nature"
 6,,danny.tran@sap.com,I855817,Danny Tran ," organizing, customers, innovation
  "," Fishing, Aqua escaping, Gaming, Fish, Eating"
-7,,david.waterman@sap.com,I818912,David Waterman ," Project Management, Human Resource",
+7,,david.waterman@sap.com,I818912,David Waterman ," Project Management, Human Resource",None
 8,,fabian.tam@sap.com,I863075,Fabian Tam ,"Development, Architecture","badminton, ping pong, restaurants, food, anime, cooking, science, philosophy"
 9,,harmandeep.cheema@sap.com,I859271,Harmandeep Cheema ," Security, products"," Reading, photography, fitness 
  "
@@ -26,12 +26,12 @@ id,google_id,email,i_number,Name,Expertise,Interest
  "
 19,,mert.karakilic@sap.com,I837359,Mert Karakilic ,"Operations, Development, Data Science, Architecture, Integration, Product Management","Fitness, nutrition, travel, racing, technology, aviation"
 20,,napon.taratan@sap.com,I861425,Napon Taratan , Debugging,"  graphic design, online games, mentoring, Android development, Japan, business, technologies, photography"
-21,,olivia.lai@sap.com,I819347,Olivia Lai,"Project Management, Translation, Sales ",
+21,,olivia.lai@sap.com,I819347,Olivia Lai,"Project Management, Translation, Sales ",None
 22,,paul.tran@sap.com,I863517,Paul Tran, Software Development," food, Chinese Language, mechanical keyboards, Linux 
  "
-23,,peter.tippett@sap.com,I819566,Peter Tippett ,"Software Development, Architecture, Management",
-24,,prachit.rohatgi@sap.com,I838675,Prachit Rohatgi ," Project management, legal compliance",
-25,,roy.budhai@sap.com,I819267,Roy Budhai ," Development, Architecture, Project Management ",
+23,,peter.tippett@sap.com,I819566,Peter Tippett ,"Software Development, Architecture, Management",None
+24,,prachit.rohatgi@sap.com,I838675,Prachit Rohatgi ," Project management, legal compliance",None
+25,,roy.budhai@sap.com,I819267,Roy Budhai ," Development, Architecture, Project Management ",None
 26,,ruhi.naaz.quadari@sap.com,I850709,Ruhi Naaz Quadari,"Cloud Platform, Self Development, Networking, Communications "," Cooking, Dancing, cultures, Reading, Public Speaking"
 27,,rybo.chen@sap.com,I859096,Rybo Chen," Product Support, Leadership, Self development, Teamwork, Communications, Networking, Career Development","exercises, books, movies, basketball"
 28,,stephanie.redivo@sap.com,I819406,"Stephanie Redivo
