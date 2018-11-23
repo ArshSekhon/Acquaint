@@ -95,7 +95,8 @@ def new_user():
 @app.route("/saving_data", methods=['GET','POST'])
 def save_data():
     email = session['email']
-    userInfo = request.args['userInfo']
+    userInfo = request.values['userInfo']
+
     print(userInfo)
     i_num = userInfo['username']
     expertise = userInfo['expertise']
@@ -119,6 +120,40 @@ def save_data():
         return jsonify({'error': "error"})
     return jsonify({'none':'none'})
 
+@app.route("/get_id",methods=['GET','POST'])
+def get_id():
+    try:
+        email = session['email']
+        print(email)
+        con = sql.connect("database.db")
+        cur = con.cursor()
+        i_num = (cur.execute('SELECT i_num FROM members WHERE email = ?', (email,))).fetchall()
+    except:
+        pass
+    return jsonify({'i_num': i_num})
+
+@app.route("/get_exp", methods=['GET','POST'])
+def get_exp():
+    try:
+        i_num = request.args['i_num']
+        con = sql.connect("database.db")
+        cur = con.cursor()
+        expertise = (cur.execute('SELECT expertise FROM expertise WHERE exprt_id = ?', (i_num,))).fetchall()
+    except:
+        pass
+    return jsonify({'expertise': expertise})
+
+@app.route("/get_int",methods=['GET','POST'])
+def get_int():
+    try:
+        i_num = request.args['i_num']
+        con = sql.connect("database.db")
+        cur = con.cursor()
+        interest = (cur.execute('SELECT interest FROM interest WHERE intrst_id = ?', (i_num,))).fetchall()
+    except:
+        pass
+    return jsonify({'interest': interest})
+
 @app.route("/dashboard")
 def dashboard():
     try:
@@ -130,8 +165,7 @@ def dashboard():
         usr = (cur.execute('SELECT * FROM members WHERE email = ?',(email,))).fetchall()
         usr_interest = (cur.execute('SELECT * FROM interest WHERE intrst_id = ?',(usr[0][0],))).fetchall()
         usr_expertise = (cur.execute('SELECT * FROM expertise WHERE exprt_id = ?',(usr[0][0],))).fetchall()
-        #print(user)
-        #print(user[0][0])
+
     except:
         con.rollback()
         msg = "error in read operation"
@@ -203,16 +237,15 @@ def url_recommendation():
     print("\n\n\n\n\n\n")
     print("api working "+request.args['url'])
     print("\n\n\n\n\n\n")
-    return "ok", 200, {'Access-Control-Allow-Origin': '*'}
-    if 'url' in request.args:
-        #print('working')
-        url = request.args['url']
+
+    url = request.args['url']
+
     #print('not working...')
     #url = request.json['url']
     #print(url)
     #print(type(url))
     rec_4_interest, rec_4_expert = test.read_from_url(url)
-    return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
+    return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert}), 200, {'Access-Control-Allow-Origin': '*'}
 
 
 @app.route("/profile_json/<i_num>")
