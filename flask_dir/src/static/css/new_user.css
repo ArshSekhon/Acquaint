@@ -185,3 +185,6 @@ label.nicelabel-default-position {
 .fancy-btn-hover:focus {
     outline: none;
 }
+p.onboarding-question {
+    margin-bottom: 8px;
+}

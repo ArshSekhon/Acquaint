@@ -40,8 +40,61 @@ function getUser(userId){
       "method": "GET"
     };
     $.ajax(settings).done(function (response) {
-      console.log(response);
+      $("#onboardin-card-4 .onboardin-heading").html("Thanks "+response["first_name"]+"!");
     });
 }
-getUsername("i867355");
 
+function transitionFrom1To2(){
+    $('#onboardin-card-1').fadeOut(500, function () {
+       setTimeout( function () {
+            $('#onboardin-card-2').fadeIn(500, function () {
+                     $('#onboardin-card-1').hide()
+            });
+            },200);
+
+    });
+
+    getUser($("#onboardin-card-1 .onboarding-answer-text").val());
+}
+function transitionFrom2To3(){
+    $('#onboardin-card-2').fadeOut(500, function () {
+       setTimeout( function () {
+            $('#onboardin-card-3').fadeIn(500, function () {
+                     $('#onboardin-card-2').hide()
+            });
+        },200);
+    });
+}
+function transitionFrom3To4(){
+    $('#onboardin-card-3').fadeOut(500, function () {
+       setTimeout( function () {
+            $('#onboardin-card-4').fadeIn(500, function () {
+                 $('#onboardin-card-3').hide()
+        });
+       },200);
+    });
+
+    var userInfo={
+        username:"",
+        expertise:[],
+        interests:[]
+    };
+
+    userInfo.username = $("#onboardin-card-1 .onboarding-answer-text").val();
+
+    var checkedValuesExpertise = $('#onboardin-card-2 input:checkbox:checked').map(function() {
+        return this.value;
+    }).get();
+    var interests = $('#onboardin-card-3 input:checkbox:checked').map(function() {
+        return this.value;
+    }).get();
+    userInfo.expertise=checkedValuesExpertise.concat($('#onboardin-card-2 .onboarding-answer-text').val().split(','))
+    userInfo.interests=interests.concat($('#onboardin-card-3 .onboarding-answer-text').val().split(','))
+
+    //add API call here
+
+
+}
+ $('#onboardin-card-1 .next-btn').click(()=>{transitionFrom1To2()});
+ $('#onboardin-card-2 .next-btn').click(()=>{transitionFrom2To3()});
+ $('#onboardin-card-3 .next-btn').click(()=>{transitionFrom3To4()});
