@@ -21,7 +21,6 @@ GOOGLE_CLIENT_ID = '164371578483-uvkhe4gn4cpnun85ge6tm72s7ddceenn.apps.googleuse
 GOOGLE_CLIENT_SECRET = 'bFHVVUFqXrOBL0AlgEfmKKTq'
 REDIRECT_URI = '/oauth2callbcak'
 
-
 blueprint = make_google_blueprint(
     client_id= GOOGLE_CLIENT_ID,
     client_secret= GOOGLE_CLIENT_SECRET,
