@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session, jsonify
+from flask import Flask, render_template, redirect, url_for, session, jsonify, request
 from flask_dance.contrib.google import make_google_blueprint, google
 from oauthlib.oauth2.rfc6749.errors import InvalidGrantError, TokenExpiredError
 from server import test
@@ -95,19 +95,26 @@ def recommendation():
     return jsonify({'id': x,'id2':y})
 
 @app.route("/recommendation/question")
-def recommendation():
-    x,y = test.run_lda("My I'm living on Earth")
+def question():
+    x,y = test.run_lda("I am in love")
     print(x,y)
     print(type(x))
     return jsonify({'id': x,'id2':y})
 
-@app.route("/recommendation/url", methods=['POST'])
-def recommendation():
-    url = request.json['url']
+@app.route("/recommendation/url", methods=['GET'])
+def url_recommendation():
+    print("api working...")
+    if 'url' in request.args:
+        print('working')
+        url = request.args['url']
+    print('not working...')
+    #url = request.json['url']
     print(url)
-    x,y = test.run_lda(url)
+    print(type(url))
+    x,y = test.read_from_url(url)
     print(x,y)
     print(type(x))
     return jsonify({'id': x,'id2':y})
+
 if __name__ == '__main__':
     app.run(debug=True)

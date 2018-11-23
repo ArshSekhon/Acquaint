@@ -54,7 +54,7 @@ from bs4 import BeautifulSoup
 
 def predict_tags(input_id):
     
-    print(os.path.join(os.getcwd(), 'data', 'excel_files','mentors.csv'))
+    #print(os.path.join(os.getcwd(), 'data', 'excel_files','mentors.csv'))
     df_peers = pd.read_csv(os.path.join(os.getcwd(),'server','data', 'excel_files','mentors.csv'))
     df_peers = df_peers[['id','Name','Expertise', 'Interest']]
     int = df_peers['Interest']
@@ -180,7 +180,7 @@ def run_lda(query):
         wordlist.append(words)
     #print(wordlist)
 
-    df_peers = pd.read_csv(os.path.join('data', 'excel_files', 'mentors.csv'))
+    df_peers = pd.read_csv(os.path.join(os.getcwd(),'server','data', 'excel_files','mentors.csv'))
     df_peers = df_peers[['id', 'Name', 'Expertise', 'Interest']]
     int = df_peers['Interest']
     exp = df_peers['Expertise']
@@ -190,7 +190,7 @@ def run_lda(query):
     list_of_expertises_vector = []
 
     model = gs.models.KeyedVectors.load_word2vec_format(
-        os.path.join(os.getcwd(), 'models', 'word2vec_models', 'GoogleNews-vectors-negative300.bin'), limit=500000,
+        os.path.join(os.getcwd(), 'server', 'models', 'word2vec_models', 'GoogleNews-vectors-negative300.bin'), limit=500000,
         binary=True)
     for i in range(len(int)):
         tags_int = str(int[i]).strip().split(',')
