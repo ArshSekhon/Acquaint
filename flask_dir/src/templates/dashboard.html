@@ -13,14 +13,22 @@
 <body>
     <!--div class="container"-->
         <div class="row header">
-            <div class="col s12 m12">
-                <a class="btn custom-btn"><i class="material-icons right">cloud</i>button</a> 
-            </div>
-
+           <img class="logo" src="{{ url_for('static', filename='images/acquaint-logo.svg') }}" alt="acquaint-logo">
+           <div class="row">
+               <div class="col s4 m4 header-text header-text-left">
+                   Your Profile
+               </div>
+               <div class="col s4 m4 header-text">
+                   Expand Your Network
+               </div>
+               <div class="col s4 m4 header-text">
+                   Ask the Experts
+               </div>
+           </div>
         </div>    
         <div class="row">
             <div class="col s4 m4">
-                    <div class="card custom-card">
+                    <div class="card custom-card-left">
                         <div class="row">
                             <div class="col s4 m4">
                                 <div class="circle">
@@ -56,17 +64,40 @@
             </div>
             <div class="col s4 m4">
                     <div class="card custom-card">
-                        <div class="card-heading">Expertise</div>
+                        <div class="card-heading">
+                            Based on your expertise and interests, you might want to start a chat with:
+                        </div>
+                        <div class="line-middle-card">
+                        </div>
                         <div class="card-content">
-                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                            <span class="oval-small"></span>
+                            <span class="mentors">
+                                <p class="mentor-name"> name</p>
+                                <p class="mentor-email">ex@ex.com</p>
+                            </span>
                         </div>
                     </div>
             </div>
             <div class="col s4 m4">
-                    <div class="card custom-card">
-                        <div class="card-heading">Interests</div>
+                    <div class="row">
+                            <div class="col s12 m12">
+                                <form action="{{ url_for('dashboard') }}" method="POST">
+                                    <input type="text" class="input" name="ques">
+                                </form>
+                            </div>
+                    </div>
+                    <div class="card custom-card-right">
+                        <div class="card-heading">
+                            <p class="ques">Question</p>
+                            <p class="ques-below">These people might be able to help:</p>
+                        </div>
+                        <div class="line-right-card"></div>
                         <div class="card-content">
-                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                            <span class="oval-small"></span>
+                            <span class="mentors">
+                                <p class="mentor-name"> name</p>
+                                <p class="mentor-email">ex@ex.com</p>
+                            </span>
                         </div>
                     </div>
             </div> 

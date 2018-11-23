@@ -33,13 +33,12 @@ blueprint = make_google_blueprint(
 app.register_blueprint(blueprint, url_prefix="/login")
 
 #Functions
-'''
-def recommendation(mid):
+def recommendation_id_func(mid):
     print("id>>>>", mid , type(mid))
     rec_4_interest, rec_4_expert = test.predict_tags(int(mid))
     print(rec_4_expert)
     return ({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
-'''
+
 
 @app.route("/")
 def index():
@@ -114,21 +113,41 @@ def dashboard():
     usr_expertise = "dummy string"
 
     #On basis of usr_id(expterise, interest) recommended mentors/peer
-    #rec_4_interest, rec_4_expert = recommendation(1) 
+    recmnd = recommendation_id_func(1)
+    rec_4_interest = recmnd['rec_4_interest']
+    rec_4_expert = recmnd['rec_4_expert'] 
     #print(rec_4_interest)
+    
+    try:
+        con = sql.connect("database.db")
+        cur = con.cursor()
+        mentor = []
+        for name in rec_4_expert:
+            x = (cur.execute('SELECT name,email FROM members WHERE name = ?',(name,))).fetchall()
+            print(x)
+            mentor = mentor.append(x[0])
+    except:
+        print("error")
+   
+    print(type(mentor))
     context = {
         'user': {
             'usr': usr,
             'usr_interest': usr_interest,
             'usr_expertise': usr_expertise
         },
-        #'interest': interest,
-        #'expertise': expertise,
+        #'interest': rec_4_interest,
+        'expertise': mentor,
     }
     return render_template('dashboard.html' , context=context)
 
-@app.route("/recommendation/id", methods=['GET'])
-def recommendation():
+
+
+##########################
+######### API's ##########
+##########################
+@app.route("/api/recommendation/id", methods=['GET'])
+def recommendation_api():
     if 'mid' in request.args:
         mid = request.args['mid']
     print("id>>>>", mid , type(mid))
@@ -136,8 +155,8 @@ def recommendation():
     print(rec_4_expert)
     return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
 
-@app.route("/recommendation/question", methods=['GET'])
-def question():
+@app.route("/api/recommendation/question", methods=['GET'])
+def question_api():
     if 'ques' in request.args:
         ques = request.args['ques']
     rec_4_interest, rec_4_expert = test.run_lda(ques)
