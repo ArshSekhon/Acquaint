@@ -103,6 +103,8 @@ def dashboard():
     usr_interest = "dummy string"
     usr_expertise = "dummy string"
 
+    #On basis of usr_id(expterise, interest) recommended mentors/peer
+    rec_4_interest, rec_4_expert = 
 
     context = {
         'user': {
@@ -117,8 +119,8 @@ def dashboard():
 
 @app.route("/recommendation/id", methods=['GET'])
 def recommendation():
-    if 'id' in request.args:
-        mid = request.args['url']
+    if 'mid' in request.args:
+        mid = request.args['mid']
     
     rec_4_interest, rec_4_expert = test.predict_tags(mid)
     return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
