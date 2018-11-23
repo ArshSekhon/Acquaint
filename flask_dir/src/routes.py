@@ -69,7 +69,7 @@ def home():
                     return redirect(url_for('new_user'))
                 else:
                     user = 'existing'
-                    print(user)
+                    session['email'] = email
                     return redirect(url_for('dashboard'))
             #return "You are {email} on Google".format(email=resp.json()["email"])
             #return render_template('home.html')
@@ -85,36 +85,63 @@ def new_user():
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template('dashboard.html')
+    try:
+        print('Entered try...')
+        email = session['email']
+        print(email,"<<<<")
+        con = sql.connect("database.db")
+        cur = con.cursor()
+        usr = (cur.execute('SELECT * FROM members WHERE email = ?',(email,))).fetchall()
+        usr_interest = (cur.execute('SELECT * FROM interest WHERE intrst_id = ?',(usr[0][0],))).fetchall()
+        usr_expertise = (cur.execute('SELECT * FROM expertise WHERE exprt_id = ?',(usr[0][0],))).fetchall()
+        #print(user)
+        #print(user[0][0])
+    except:
+        con.rollback()
+        msg = "error in read operation"
+    #nothing tables in yet so intialising
+    usr_interest = "dummy string"
+    usr_expertise = "dummy string"
 
-@app.route("/recommendation")
+
+    context = {
+        'user': {
+            'usr': usr,
+            'usr_interest': usr_interest,
+            'usr_expertise': usr_expertise
+        },
+        #'interest': interest,
+        #'expertise': expertise,
+    }
+    return render_template('dashboard.html' , context)
+
+@app.route("/recommendation/id", methods=['GET'])
 def recommendation():
-    x,y = test.predict_tags(1)
-    print(x,y)
-    print(type(x))
-    return jsonify({'id': x,'id2':y})
+    if 'id' in request.args:
+        mid = request.args['url']
+    
+    rec_4_interest, rec_4_expert = test.predict_tags(mid)
+    return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
 
-@app.route("/recommendation/question")
+@app.route("/recommendation/question", methods=['GET'])
 def question():
-    x,y = test.run_lda("I am in love")
-    print(x,y)
-    print(type(x))
-    return jsonify({'id': x,'id2':y})
+    if 'ques' in request.args:
+        ques = request.args['ques']
+    rec_4_interest, rec_4_expert = test.run_lda(ques)
+    return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
 
 @app.route("/recommendation/url", methods=['GET'])
 def url_recommendation():
-    print("api working...")
+    #print("api working...")
     if 'url' in request.args:
-        print('working')
+        #print('working')
         url = request.args['url']
-    print('not working...')
+    #print('not working...')
     #url = request.json['url']
-    print(url)
-    print(type(url))
-    x,y = test.read_from_url(url)
-    print(x,y)
-    print(type(x))
-    return jsonify({'id': x,'id2':y})
+    #print(url)
+    #print(type(url))
+    rec_4_interest, rec_4_expert = test.read_from_url(url)
+    return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
 
 if __name__ == '__main__':
     app.run(debug=True)
