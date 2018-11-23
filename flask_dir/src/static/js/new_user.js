@@ -92,7 +92,19 @@ function transitionFrom3To4(){
     userInfo.interests=interests.concat($('#onboardin-card-3 .onboarding-answer-text').val().split(','))
 
     //add API call here
-
+    $('button').click(function() {
+        $.ajax({
+            url: '/saving_data',
+            data: {'userInfo': userInfo},
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
 
 }
  $('#onboardin-card-1 .next-btn').click(()=>{transitionFrom1To2()});
