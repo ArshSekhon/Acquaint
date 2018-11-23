@@ -3,6 +3,9 @@ from flask_dance.contrib.google import make_google_blueprint, google
 from oauthlib.oauth2.rfc6749.errors import InvalidGrantError, TokenExpiredError
 from server import test
 
+#For calling API endpoint within this app
+import requests, json
+
 #For disabling https requiremet for google authenication
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
@@ -120,8 +123,9 @@ def dashboard():
 def recommendation():
     if 'mid' in request.args:
         mid = request.args['mid']
-    
-    rec_4_interest, rec_4_expert = test.predict_tags(mid)
+    print("id>>>>", mid , type(mid))
+    rec_4_interest, rec_4_expert = test.predict_tags(int(mid))
+    print(rec_4_expert)
     return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
 
 @app.route("/recommendation/question", methods=['GET'])
@@ -144,9 +148,17 @@ def url_recommendation():
     rec_4_interest, rec_4_expert = test.read_from_url(url)
     return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
 
-@app.route("/profile")
-def profile():
-    return "nothing"
+@app.route("/profile/<i_num>")
+def profile(i_num):
+    params = {
+        'mid': i_num,
+    }
+    r = requests.get(
+      'http://127.0.0.1:5000/recommendation/id',
+      params=params)
+    result = r.json()
+    print(result['rec_4_interest'])
+    return render_template('profile.html')
 
 
 if __name__ == '__main__':
