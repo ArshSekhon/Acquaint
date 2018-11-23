@@ -85,14 +85,8 @@
                             <p class="ques-below">These people might be able to help:</p>
                         </div>
                         <div class="line-right-card"></div>
-                        <div class="card-content">
-                            <div class="ques-men">
-                            <span class="oval-small"></span>
-                            <span class="mentors">
-                                <p class="mentor-name"> name</p>
-                                <p class="mentor-email">ex@ex.com</p>
-                            </span>
-                            </div>
+                        <div class="card-content" id="ques_cotent">
+                            
                         </div>
                     </div>
             </div> 
@@ -139,15 +133,15 @@
 							console.log(response.rec_4_interest)
                             console.log(response.rec_4_interest.length)
                             $('.ques').text(ques);
+                            var small_circle = '<span class="oval-small"></span>';
+                            var men = '<span class="mentors">';
+                            var nam = '<p class="mentor-name"> name</p>';
+                            var email = '<p class="mentor-email">ex@ex.com</p>';
                             len = response.rec_4_interest.length
-                            for(i=0; i<len; i++){
-                               /*var cont =  
-                               
-                            "<span class="oval-small"></span>
-                            <span class="mentors">
-                                <p class="mentor-name"> name</p>
-                                <p class="mentor-email">ex@ex.com</p>
-                            </span>"*/
+                            for(var exp in response.rec_4_expert){
+                                console.log(exp);
+                                var $entry = $('<div class="ques-men"><span class="oval-small"></span><span class="mentors"><p class="mentor-name"> '+ response.rec_4_expert[exp]+'</p><p class="mentor-email">'+ response.rec_4_expert[exp]+'</p></span></div>')
+                               $('#ques_cotent').append( $entry ); 
                             }
 						} else {
 							console.log("error");

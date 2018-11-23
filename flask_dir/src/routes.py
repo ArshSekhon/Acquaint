@@ -199,11 +199,12 @@ def question_api():
 
 @app.route("/ext/processActivity", methods=['GET','POST'])
 def url_recommendation():
+    i_num = 'I866044'
     #print("api working...")
     print("\n\n\n\n\n\n")
     print("api working "+request.args['url'])
     print("\n\n\n\n\n\n")
-    return "ok", 200, {'Access-Control-Allow-Origin': '*'}
+    #return "ok", 200, {'Access-Control-Allow-Origin': '*'}
     if 'url' in request.args:
         #print('working')
         url = request.args['url']
@@ -233,8 +234,8 @@ def profile(i_num):
         'cache-control': "no-cache" 
         }
 
-    #response = requests.request("GET", url, headers=headers,verify=False)
-
+    response = requests.request("GET", url, headers=headers,verify=False)
+    print(response.text)
     #print(response.text)
     context = {
         'person': {
