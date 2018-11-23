@@ -92,6 +92,33 @@ def home():
 def new_user():
     return render_template('new_user.html')
 
+@app.route("/saving_data", methods=['GET','POST'])
+def save_data():
+    email = session['email']
+    userInfo = request.args['userInfo']
+    print(userInfo)
+    i_num = userInfo['username']
+    expertise = userInfo['expertise']
+    interests = userInfo['interests']
+    i_score = 500
+    e_score = 1000
+    try:
+        con = sql.connect("database.db")
+        cur = con.cursor()
+        cur.execute("UPDATE members SET i_num = ? WHERE email = ?", (i_num, email))
+        mid = (cur.execute('SELECT mid FROM members WHERE email = ?', (email,))).fetchall()
+        for i in interests:
+            cur.execute("INSERT INTO interest (intrst_id, interest, level) VALUES (?,?,?)",(mid, i, i_score))
+
+        for e in expertise:
+            cur.execute("INSERT INTO expertise (exprt_id, expertise, level) VALUES (?,?,?)", (mid, e, e_score))
+        con.commit()
+        return jsonify({'success': "success"})
+    except:
+        print("error")
+        return jsonify({'error': "error"})
+    return jsonify({'none':'none'})
+
 @app.route("/dashboard")
 def dashboard():
     try:
