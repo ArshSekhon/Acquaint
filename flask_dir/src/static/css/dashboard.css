@@ -11,15 +11,39 @@ padding: 0!important;;
 }
 
 .header-text.header-txt-center {
-    margin-left: -3% !important;
+    margin-left: 0% !important;
     padding-left: 0 !important;
 }
 .header-text.header-txt-right {
-    margin-left: -5% !important;
+    margin-left: 0% !important;
     padding-left: 0 !important;
 }
 
 
 .row.header-text-row {
     margin-bottom: 2px !important;
+}
+.row.profile-header {
+    display: flex;
+}
+.name-container{
+    display: flex;
+    flex-direction: column;
+}
+#name{
+    font-family: "Work Sans";
+    margin: auto auto auto 4%; width:auto;
+    font-size:2.3em;
+    color:#ec747e;
+}
+.prof-info{
+    font-family:'Work Sans';
+    font-size: 16px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.44;
+    letter-spacing: normal;
+    color:#757575;
+    margin: 0 15% 0 5%;
 }
