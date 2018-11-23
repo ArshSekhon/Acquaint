@@ -104,7 +104,7 @@ def dashboard():
     usr_expertise = "dummy string"
 
     #On basis of usr_id(expterise, interest) recommended mentors/peer
-    rec_4_interest, rec_4_expert = 
+    #rec_4_interest, rec_4_expert = 
 
     context = {
         'user': {
@@ -144,6 +144,11 @@ def url_recommendation():
     #print(type(url))
     rec_4_interest, rec_4_expert = test.read_from_url(url)
     return jsonify({'rec_4_interest': rec_4_interest,'rec_4_expert': rec_4_expert})
+
+@app.route("/profile"):
+def profile():
+    return "nothing"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
