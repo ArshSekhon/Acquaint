@@ -10,24 +10,32 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body>
     <!--div class="container"-->
-        <div class="row header">
+        <div class="row header ">
            <img class="logo" src="{{ url_for('static', filename='images/acquaint-logo.svg') }}" alt="acquaint-logo">
-           <div class="row">
-               <div class="col s4 m4 header-text header-text-left">
-                   Your Profile
+           <div class="row header-text-row">
+               <div class="col s4 m4 ">
+                   <div class="header-text header-txt-left">
+                        Your Profile
+                    </div>
                </div>
-               <div class="col s4 m4 header-text">
-                   Expand Your Network
+               <div class="col s4 m4"> 
+                   <div class="header-text header-txt-center">
+                        Ask the Experts
+                    </div>
                </div>
-               <div class="col s4 m4 header-text">
-                   Ask the Experts
+               <div class="col s4 m4 ">
+                   
+                   <div class="header-text header-txt-right">
+                        Expand Your Network
+                    </div>
                </div>
            </div>
         </div>    
-        <div class="row">
+        <div class="row ">
             <div class="col s4 m4">
                     <div class="card custom-card-left">
                         <div class="row">
@@ -64,6 +72,31 @@
                     </div>
             </div>
             <div class="col s4 m4">
+                    <div class="row">
+                            <div class="col s12 m12">
+                                <!--form action="{{ url_for('dashboard') }}" method="POST">
+                                </form-->
+                                <input id="ques_id" type="text" class="input" name="ques" value="" placeholder="Ask a question, any question!">
+                            </div>
+                    </div>
+                    <div class="card custom-card-right">
+                        <div class="card-heading">
+                            <p class="ques">Question</p>
+                            <p class="ques-below">These people might be able to help:</p>
+                        </div>
+                        <div class="line-right-card"></div>
+                        <div class="card-content">
+                            <div class="ques-men">
+                            <span class="oval-small"></span>
+                            <span class="mentors">
+                                <p class="mentor-name"> name</p>
+                                <p class="mentor-email">ex@ex.com</p>
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+            </div> 
+            <div class="col s4 m4">
                     <div class="card custom-card">
                         <div class="card-heading">
                             Based on your expertise and interests, you might want to start a chat with:
@@ -83,29 +116,7 @@
                         </div>
                     </div>
             </div>
-            <div class="col s4 m4">
-                    <div class="row">
-                            <div class="col s12 m12">
-                                <!--form action="{{ url_for('dashboard') }}" method="POST">
-                                </form-->
-                                <input id="ques_id" type="text" class="input" name="ques" value="" placeholder="Ask a question, any question!">
-                            </div>
-                    </div>
-                    <div class="card custom-card-right">
-                        <div class="card-heading">
-                            <p class="ques">Question</p>
-                            <p class="ques-below">These people might be able to help:</p>
-                        </div>
-                        <div class="line-right-card"></div>
-                        <div class="card-content">
-                            <span class="oval-small"></span>
-                            <span class="mentors">
-                                <p class="mentor-name"> name</p>
-                                <p class="mentor-email">ex@ex.com</p>
-                            </span>
-                        </div>
-                    </div>
-            </div> 
+            
         </div>
     <!--/div-->
 </body>
@@ -126,6 +137,18 @@
 						if(response){
                             console.log("Successful")
 							console.log(response.rec_4_interest)
+                            console.log(response.rec_4_interest.length)
+                            $('.ques').text(ques);
+                            len = response.rec_4_interest.length
+                            for(i=0; i<len; i++){
+                               /*var cont =  
+                               
+                            "<span class="oval-small"></span>
+                            <span class="mentors">
+                                <p class="mentor-name"> name</p>
+                                <p class="mentor-email">ex@ex.com</p>
+                            </span>"*/
+                            }
 						} else {
 							console.log("error");
 							

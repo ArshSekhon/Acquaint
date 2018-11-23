@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900');
+.card{box-shadow: 0 10px 20px 0 #d7d7d7!important;}
+#ques_id{
+    width: 94%;
+}
+.header-text.header-txt-center {
+}
+.header-text-row col{
+margin: 0 !important;
+padding: 0!important;;
+}
+
+.header-text.header-txt-center {
+    margin-left: -3% !important;
+    padding-left: 0 !important;
+}
+.header-text.header-txt-right {
+    margin-left: -5% !important;
+    padding-left: 0 !important;
+}
+
+
+.row.header-text-row {
+    margin-bottom: 2px !important;
+}

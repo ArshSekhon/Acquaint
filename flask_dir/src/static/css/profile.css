@@ -1,0 +1,125 @@
+.logo{
+    width: 220px;
+    height: 70px;
+    margin: 45px 42px auto;
+}
+
+.header {
+    width: 100vw; 
+    background-image: linear-gradient(262deg, #ec6f66, #f3a183);
+    margin-bottom: 20px;
+  }
+.header-text{
+    width: fit-content; 
+    font-family: "work sans";
+    font-size: 24px;
+    padding: 0 0 16px 36px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 0.96;
+    letter-spacing: normal;
+    color: #ffffff;
+    margin-top: 50px;
+    margin-left: 0;
+}  
+.custom-btn {
+    margin-top: 140px;
+    margin-left: 30px;
+}
+
+.custom-card-left {
+    margin-left: 20px;
+}
+
+.custom-card-right {
+    margin-right: 20px;
+}
+.circle {
+    margin: 30px;
+    width: 95px;
+    height: 95px;
+    background-color: #d8d8d8;
+}
+.oval-small{
+    width: 33px;
+    height: 33px;
+    background-color: #d8d8d8;
+    border-radius: 50%;
+    display: inline-block;
+}
+.mentors{
+    display: inline-block;
+    margin: 10px;
+}
+.mentor-name{
+   font-size: 14px;
+   color: #ec747e; 
+   margin-top: 0;
+}
+.mentor-email{
+    font-size: 11px;
+    color: #757575;
+}
+#name {
+    width: 147px;
+    height: 23px;
+    font-family: WorkSans;
+    font-size: 24px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 0.96;
+    letter-spacing: normal;
+    color: var(--pink);
+}
+
+.line {
+    width: 445px;
+    height: 2px;
+    background-color: #e8e8e8;
+}
+
+.line-middle-card{
+    width: 480px;
+    height: 2px;
+    background-color: #e8e8e8;
+}
+.line-right-card{
+    width: 480px;
+    height: 2px;
+    background-color: #e8e8e8;
+}
+.card-heading {
+    font-family: WorkSans;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #929292;
+    padding: 20px;
+    padding-bottom: 5px; 
+  }
+
+.content {
+    padding-left: 35px;
+    font-size: 16px;
+    color: #ec747e;
+}
+.input {
+    width: 530px;
+    height: 51px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    margin-right: 20px;
+  }
+
+  .ques{
+      margin-bottom: 0;
+      font-weight: 500;  
+  }
+  .ques-below{
+    font-weight: 300;
+  }
