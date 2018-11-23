@@ -16,4 +16,12 @@ try:
 except:
 	print("Database already exists")
 #close database
+
+def populate_members:
+	cur.execute("INSERT INTO members (google_id, email, name, i_number) VALUES (?,?,?,?)", (google_id, email, name, inumber))
+def populate_interest:
+def populate_expertise:
+def get_names:
+def get_interests_from_names:
+def get_expertise_from_names:
 conn.close()
