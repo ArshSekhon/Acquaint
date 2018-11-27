@@ -92,15 +92,18 @@ def home():
 def new_user():
     return render_template('new_user.html')
 
+#Ajax method to save data to member table
 @app.route("/saving_data", methods=['GET','POST'])
 def save_data():
     email = session['email']
-    userInfo = request.values['userInfo']
-
-    print(userInfo)
+    if 'userInfo' in request.form:
+        userInfo = json.loads(request.form['userInfo']) #Parse to dict from incoming string
+    
     i_num = userInfo['username']
     expertise = userInfo['expertise']
     interests = userInfo['interests']
+    
+    print(i_num,type(i_num),expertise,type(expertise),interests,type(interests))
     i_score = 500
     e_score = 1000
     try:
@@ -108,10 +111,14 @@ def save_data():
         cur = con.cursor()
         cur.execute("UPDATE members SET i_num = ? WHERE email = ?", (i_num, email))
         mid = (cur.execute('SELECT mid FROM members WHERE email = ?', (email,))).fetchall()
+        mid = mid[0][0]
+        print("mid",mid)
         for i in interests:
+            print(i)
             cur.execute("INSERT INTO interest (intrst_id, interest, level) VALUES (?,?,?)",(mid, i, i_score))
 
         for e in expertise:
+            print(e)
             cur.execute("INSERT INTO expertise (exprt_id, expertise, level) VALUES (?,?,?)", (mid, e, e_score))
         con.commit()
         return jsonify({'success': "success"})
@@ -157,43 +164,37 @@ def get_int():
 @app.route("/dashboard")
 def dashboard():
     try:
-        print('Entered try...')
         email = session['email']
-        print(email,"<<<<")
         con = sql.connect("database.db")
         cur = con.cursor()
         usr = (cur.execute('SELECT * FROM members WHERE email = ?',(email,))).fetchall()
-        usr_interest = (cur.execute('SELECT * FROM interest WHERE intrst_id = ?',(usr[0][0],))).fetchall()
-        usr_expertise = (cur.execute('SELECT * FROM expertise WHERE exprt_id = ?',(usr[0][0],))).fetchall()
+        usr_interest = (cur.execute('SELECT interest FROM interest WHERE intrst_id = ?',(usr[0][0],))).fetchall()
+        usr_expertise = (cur.execute('SELECT expertise FROM expertise WHERE exprt_id = ?',(usr[0][0],))).fetchall()
 
     except:
         con.rollback()
         msg = "error in read operation"
+    
     #nothing tables in yet so intialising
-    usr_interest = "dummy string"
-    usr_expertise = "dummy string"
+    #usr_interest = "dummy string"
+    #usr_expertise = "dummy string"
 
     #On basis of usr_id(expterise, interest) recommended mentors/peer
     recmnd = recommendation_id_func(1)
     rec_4_interest = recmnd['rec_4_interest']
     rec_4_expert = recmnd['rec_4_expert'] 
-    #print(rec_4_interest)
+    
     
     try:
         con = sql.connect("database.db")
         cur = con.cursor()
         mentor = []
         for name in rec_4_expert:
-            print(name)
             x = (cur.execute('SELECT name,email FROM members WHERE name = ?',(name,))).fetchall()
-            print(x[0])
             mentor.append(x[0])
-            print(type(mentor))
     except:
         print("error")
-    print(mentor)
-    for x in mentor:
-        print(x[0], x[1])
+
     context = {
         'user': {
             'usr': usr,
@@ -238,16 +239,9 @@ def url_recommendation():
     print("\n\n\n\n\n\n")
     print("api working "+request.args['url'])
     print("\n\n\n\n\n\n")
-<<<<<<< HEAD
-    #return "ok", 200, {'Access-Control-Allow-Origin': '*'}
-    if 'url' in request.args:
-        #print('working')
-        url = request.args['url']
-=======
 
     url = request.args['url']
 
->>>>>>> 377ba9748b4ea6fd9387a9b8c15d86330e37f5d2
     #print('not working...')
     #url = request.json['url']
     #print(url)

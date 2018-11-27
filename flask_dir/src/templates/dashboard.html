@@ -63,13 +63,19 @@
                         <div class="row">
                             <div class="col s12 m12">
                                 <div class="card-heading">Expertise</div>
+                                    {% for e in context['user']['usr_expertise'] %}
+                                        {{ e[0]}}
+                                    {% endfor %}    
                             </div>
                         </div>
                         <div class="line"></div>
                         <div class="row">
-                                <div class="col s12 m12">
-                                    <div class="card-heading">Expertise</div>
-                                </div>
+                            <div class="col s12 m12">
+                                <div class="card-heading">Interests</div>
+                                    {% for i in context['user']['usr_interest'] %}
+                                        {{ i[0]}}
+                                    {% endfor %}
+                            </div>
                         </div>
                     </div>
             </div>
@@ -81,7 +87,9 @@
                                 <input id="ques_id" type="text" class="input" name="ques" value="" placeholder="Ask a question, any question!">
                             </div>
                     </div>
-                    <div class="card custom-card-right">
+                    <div id="loader-text" style="display: none;">Getting Results For you!</div>
+                    <div id="loading-image" style="display: none;"></div>
+                    <div class="card custom-card-right" style="display: none;">
                         <div class="card-heading">
                             <p class="ques">Question</p>
                             <p class="ques-below">These people might be able to help:</p>
@@ -123,6 +131,7 @@
                 console.log("entered..")
                 $(this).attr("disable", "disabled");
                 var ques = $(this).val()
+                $('#loader-text').show();
                 $('#loading-image').show();
                 $.ajax({
 					url: '/api/recommendation/question',
@@ -131,10 +140,11 @@
 					success: function(response){
                         console.log(response)
 						if(response){
+                            $('.custom-card-right').show();
                             console.log("Successful")
 							console.log(response.rec_4_interest)
                             console.log(response.rec_4_interest.length)
-                            $('.ques').text(ques);
+                            $('.ques').text("Question: "+ques);
                             var small_circle = '<span class="oval-small"></span>';
                             var men = '<span class="mentors">';
                             var nam = '<p class="mentor-name"> name</p>';
@@ -151,6 +161,7 @@
 						}						
 					},
                     complete: function(){
+                        $('#loader-text').hide();
                         $('#loading-image').hide();
                     },
                     
